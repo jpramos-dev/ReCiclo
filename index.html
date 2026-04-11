@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RPYW10FKXD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RPYW10FKXD');
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReCiclo - Jogo Educativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="bubbles">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        
+        <header>
+            <div class="logo">
+                <i class="fas fa-recycle"></i>
+                <div>
+                    <h1>ReCiclo</h1>
+                    <div class="subtitle">Jogo educativo sobre reciclagem e vida na água</div>
+                </div>
+            </div>
+            <div class="water-wave"></div>
+        </header>
+        
+        <div class="content">
+            <!-- Tela inicial -->
+            <div class="start-screen" id="start-screen">
+                <h2>Teste seus conhecimentos sobre sustentabilidade!</h2>
+                <p>O jogo ReCiclo apresenta 15 perguntas sobre reciclagem, conservação da água e vida marinha, temas relacionados aos Objetivos de Desenvolvimento Sustentável (ODS) da ONU.</p>
+                
+                <div class="ods-logos">
+                    <div class="ods-logo ods-12">12</div>
+                    <div class="ods-logo ods-14">14</div>
+                </div>
+                
+                <p>ODS 12: Consumo e produção responsáveis<br>ODS 14: Vida na água</p>
+                
+                <button class="btn" id="start-btn">
+                    <i class="fas fa-play"></i> Iniciar Jogo
+                </button>
+            </div>
+            
+            <!-- Tela do jogo -->
+            <div class="game-screen" id="game-screen">
+                <div class="question-container">
+                    <div class="question-header">
+                        <div>PERGUNTA <span id="current-question">1</span>/15</div>
+                        <div>PONTOS: <span id="score">0</span></div>
+                    </div>
+                    
+                    <div class="question-text" id="question-text">
+                        Carregando pergunta...
+                    </div>
+                    
+                    <div class="options-container" id="options-container">
+                        <!-- Opções serão adicionadas por JavaScript -->
+                    </div>
+                    
+                    <div class="feedback" id="feedback">
+                        <!-- Feedback será adicionado por JavaScript -->
+                    </div>
+                    
+                    <div class="next-btn-container" id="next-btn-container" style="display: none;">
+                        <button class="btn-next" id="next-btn">
+                            <i class="fas fa-arrow-right"></i> Próxima Pergunta
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                
+                <div class="footer-note">
+                    Ajude a proteger nossos oceanos e promover a reciclagem!
+                </div>
+            </div>
+            
+            <!-- Tela de resultados -->
+            <div class="result-screen" id="result-screen">
+                <h2>Resultado Final</h2>
+                
+                <div class="score-circle" id="score-circle">
+                    <div class="score-inner">
+                        <div class="score-value" id="final-score">0</div>
+                        <div class="score-text">PONTOS</div>
+                    </div>
+                    <i class="fas fa-tint water-icon"></i>
+                    <i class="fas fa-tint water-icon"></i>
+                    <i class="fas fa-tint water-icon"></i>
+                    <i class="fas fa-tint water-icon"></i>
+                </div>
+                
+                <div class="result-message" id="result-message"></div>
+                
+                <button class="btn" id="restart-btn">
+                    <i class="fas fa-redo"></i> Jogar Novamente
+                </button>
+                
+                <div class="footer-note">
+                    Compartilhe esse jogo e ajude a conscientizar mais pessoas!
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Elementos decorativos -->
+    <div class="fish">🐠</div>
+    <div class="fish" style="top: 30%; animation-delay: 5s; animation-duration: 30s;">🐟</div>
+    <div class="fish" style="top: 70%; animation-delay: 10s; animation-duration: 35s;">🐡</div>
+    <div class="turtle">🐢</div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
