@@ -83,7 +83,7 @@ const questions = [
             "2 anos",
             "20 anos",
             "100 anos",
-            "450 anos"
+            "850 anos"
         ],
         answer: 2,
         explanation: "Sacolas plásticas podem levar de 100 a 500 anos para se decompor no ambiente, dependendo das condições."
@@ -91,7 +91,7 @@ const questions = [
     {
         question: "O que é microplástico?",
         options: [
-            "Pequenas partículas de plástico com menos de 5mm",
+            "Pequenas partículas de plástico",
             "Plástico biodegradável",
             "Plástico reciclado",
             "Plástico de alta densidade"
