@@ -36,13 +36,13 @@ const questions = [
     {
         question: "Qual é a porcentagem aproximada de oxigênio da Terra produzido pelos oceanos?",
         options: [
-            "10%",
-            "30%",
-            "50%",
-            "70%"
+            "10% - 20%",
+            "30% - 40%",
+            "50% - 80% ",
+            "70% - 90%"
         ],
         answer: 2,
-        explanation: "Os oceanos produzem cerca de 50-70% do oxigênio da Terra através do fitoplâncton e outras plantas marinhas."
+        explanation: "Os oceanos produzem cerca de 50-80% do oxigênio da Terra através do fitoplâncton e outras plantas marinhas."
     },
     {
         question: "Qual destes itens NÃO deve ser colocado no lixo reciclável?",
