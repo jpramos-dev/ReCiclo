@@ -486,12 +486,6 @@ h1 {
     transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* =====================================================
-   CORREÇÃO: Peixes e tartaruga
-   - position: fixed para sair do container e cobrir a tela toda
-   - Animação invertida: da direita (100vw) para a esquerda (-150px)
-   - scaleX(-1) aplicado fixo para o emoji já olhar para a esquerda
-   ===================================================== */
 
 .fish {
     position: fixed;

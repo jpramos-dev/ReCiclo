@@ -184,14 +184,14 @@ const progressBar = document.getElementById('progress-bar');
 const scoreCircle = document.getElementById('score-circle');
 const nextBtnContainer = document.getElementById('next-btn-container');
 
-// Variáveis de controle
+
 let currentQuestion = 0;
 let playerScore = 0;
 let gameActive = false;
 let canAnswer = true;
 let nextButton = null;
 
-// Iniciar o jogo
+
 startBtn.addEventListener('click', startGame);
 restartBtn.addEventListener('click', startGame);
 
@@ -214,7 +214,7 @@ function showQuestion() {
     
     canAnswer = true;
     
-    // Esconder botão próximo e feedback
+
     nextBtnContainer.style.display = 'none';
     feedbackElement.style.display = 'none';
     
@@ -222,14 +222,14 @@ function showQuestion() {
     questionText.textContent = question.question;
     currentQuestionElement.textContent = currentQuestion + 1;
     
-    // Atualizar barra de progresso
+
     const progressPercentage = ((currentQuestion) / questions.length) * 100;
     progressBar.style.width = `${progressPercentage}%`;
     
-    // Limpar opções anteriores
+
     optionsContainer.innerHTML = '';
     
-    // Adicionar novas opções
+
     question.options.forEach((option, index) => {
         const optionElement = document.createElement('div');
         optionElement.classList.add('option');
@@ -251,7 +251,7 @@ function checkAnswer(selectedIndex) {
     const question = questions[currentQuestion];
     const options = optionsContainer.querySelectorAll('.option');
     
-    // Desabilitar todos os cliques nas opções
+
     options.forEach(option => {
         option.style.pointerEvents = 'none';
     });
@@ -278,11 +278,11 @@ function checkAnswer(selectedIndex) {
     
     updateScore();
     
-    // Mostrar botão "Próxima" (a menos que seja a última pergunta)
+
     if (currentQuestion + 1 < questions.length) {
         nextBtnContainer.style.display = 'block';
         
-        // Criar o botão se não existir ou remover listeners antigos
+
         if (nextButton) {
             nextButton.removeEventListener('click', nextQuestion);
         }
@@ -336,7 +336,7 @@ function endGame() {
     const percentage = (playerScore / (questions.length * 10)) * 100;
     finalScoreElement.textContent = playerScore;
     
-    // Atualizar o círculo de pontuação
+
     scoreCircle.style.setProperty('--percentage', `${percentage}%`);
     
     // Definir mensagem baseada na pontuação
