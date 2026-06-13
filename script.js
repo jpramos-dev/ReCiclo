@@ -1,4 +1,3 @@
-// Perguntas e respostas
 const questions = [
     {
         question: "O descarte inadequado de plásticos em áreas urbanas afeta a vida aquática principalmente porque",
@@ -183,7 +182,7 @@ const resultMessageElement = document.getElementById('result-message');
 const progressBar = document.getElementById('progress-bar');
 const scoreCircle = document.getElementById('score-circle');
 const nextBtnContainer = document.getElementById('next-btn-container');
-const nextBtn = document.getElementById('next-btn'); // referência única e fixa ao botão
+const nextBtn = document.getElementById('next-btn'); 
 
 
 let currentQuestion = 0;
@@ -192,12 +191,18 @@ let gameActive = false;
 let canAnswer = true;
 
 
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+
 startBtn.addEventListener('click', startGame);
 restartBtn.addEventListener('click', startGame);
 
-// Listener único e fixo para o botão "Próxima/Resultado".
-// Como nunca trocamos a referência da função, removeEventListener
-// sempre funciona corretamente e não há acúmulo de listeners.
+
 nextBtn.addEventListener('click', handleNextClick);
 
 function handleNextClick() {
@@ -213,6 +218,8 @@ function startGame() {
     playerScore = 0;
     gameActive = true;
     canAnswer = true;
+
+    shuffleArray(questions);
 
     startScreen.style.display = 'none';
     gameScreen.style.display = 'block';
@@ -291,8 +298,7 @@ function checkAnswer(selectedIndex) {
 
     updateScore();
 
-    // Apenas atualiza o texto do botão; o listener de clique
-    // já está fixo em handleNextClick desde o início.
+
     nextBtnContainer.style.display = 'block';
 
     if (currentQuestion + 1 < questions.length) {
@@ -330,7 +336,7 @@ function endGame() {
 
     scoreCircle.style.setProperty('--percentage', `${percentage}%`);
 
-    // Definir mensagem baseada na pontuação
+  
     if (percentage >= 80) {
         resultMessageElement.textContent = 'Parabéns! Você é um expert em sustentabilidade!';
         resultMessageElement.style.color = '#38b000';
