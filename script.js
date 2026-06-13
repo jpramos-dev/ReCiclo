@@ -183,52 +183,65 @@ const resultMessageElement = document.getElementById('result-message');
 const progressBar = document.getElementById('progress-bar');
 const scoreCircle = document.getElementById('score-circle');
 const nextBtnContainer = document.getElementById('next-btn-container');
+const nextBtn = document.getElementById('next-btn'); // referência única e fixa ao botão
 
 
 let currentQuestion = 0;
 let playerScore = 0;
 let gameActive = false;
 let canAnswer = true;
-let nextButton = null;
 
 
 startBtn.addEventListener('click', startGame);
 restartBtn.addEventListener('click', startGame);
+
+// Listener único e fixo para o botão "Próxima/Resultado".
+// Como nunca trocamos a referência da função, removeEventListener
+// sempre funciona corretamente e não há acúmulo de listeners.
+nextBtn.addEventListener('click', handleNextClick);
+
+function handleNextClick() {
+    if (currentQuestion + 1 >= questions.length) {
+        endGame();
+    } else {
+        nextQuestion();
+    }
+}
 
 function startGame() {
     currentQuestion = 0;
     playerScore = 0;
     gameActive = true;
     canAnswer = true;
-    
+
     startScreen.style.display = 'none';
     gameScreen.style.display = 'block';
     resultScreen.style.display = 'none';
-    
+
     updateScore();
     showQuestion();
 }
 
 function showQuestion() {
     if (!gameActive) return;
-    
+
     canAnswer = true;
-    
+
 
     nextBtnContainer.style.display = 'none';
     feedbackElement.style.display = 'none';
-    
+
     const question = questions[currentQuestion];
     questionText.textContent = question.question;
     currentQuestionElement.textContent = currentQuestion + 1;
-    
+
 
     const progressPercentage = ((currentQuestion) / questions.length) * 100;
     progressBar.style.width = `${progressPercentage}%`;
-    
+
 
     optionsContainer.innerHTML = '';
-    
+
 
     question.options.forEach((option, index) => {
         const optionElement = document.createElement('div');
@@ -237,7 +250,7 @@ function showQuestion() {
             <div class="option-letter">${String.fromCharCode(65 + index)}</div>
             <div class="option-text">${option}</div>
         `;
-        
+
         optionElement.addEventListener('click', () => checkAnswer(index));
         optionsContainer.appendChild(optionElement);
     });
@@ -245,19 +258,19 @@ function showQuestion() {
 
 function checkAnswer(selectedIndex) {
     if (!gameActive || !canAnswer) return;
-    
+
     canAnswer = false;
-    
+
     const question = questions[currentQuestion];
     const options = optionsContainer.querySelectorAll('.option');
-    
+
 
     options.forEach(option => {
         option.style.pointerEvents = 'none';
     });
-    
+
     feedbackElement.style.display = 'block';
-    
+
     if (selectedIndex === question.answer) {
         feedbackElement.textContent = `✓ Correto! ${question.explanation}`;
         feedbackElement.className = 'feedback correct';
@@ -275,48 +288,26 @@ function checkAnswer(selectedIndex) {
         options[question.answer].style.borderColor = '#38b000';
         options[question.answer].querySelector('.option-letter').style.background = '#38b000';
     }
-    
+
     updateScore();
-    
+
+    // Apenas atualiza o texto do botão; o listener de clique
+    // já está fixo em handleNextClick desde o início.
+    nextBtnContainer.style.display = 'block';
 
     if (currentQuestion + 1 < questions.length) {
-        nextBtnContainer.style.display = 'block';
-        
-
-        if (nextButton) {
-            nextButton.removeEventListener('click', nextQuestion);
-        }
-        
-        nextButton = document.getElementById('next-btn');
-        nextButton.innerHTML = '<i class="fas fa-arrow-right"></i> Próxima Pergunta';
-        nextButton.addEventListener('click', nextQuestion);
+        nextBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Próxima Pergunta';
     } else {
-        // Se for a última pergunta, mostrar botão para finalizar
-        nextBtnContainer.style.display = 'block';
-        const nextBtn = document.getElementById('next-btn');
         nextBtn.innerHTML = '<i class="fas fa-trophy"></i> Ver Resultado';
-        
-        if (nextButton) {
-            nextButton.removeEventListener('click', nextQuestion);
-        }
-        
-        nextButton = document.getElementById('next-btn');
-        nextButton.addEventListener('click', () => {
-            if (currentQuestion + 1 >= questions.length) {
-                endGame();
-            } else {
-                nextQuestion();
-            }
-        });
     }
 }
 
 function nextQuestion() {
-    
+
     nextBtnContainer.style.display = 'none';
-    
+
     currentQuestion++;
-    
+
     if (currentQuestion < questions.length) {
         showQuestion();
     } else {
@@ -332,13 +323,13 @@ function endGame() {
     gameActive = false;
     gameScreen.style.display = 'none';
     resultScreen.style.display = 'flex';
-    
+
     const percentage = (playerScore / (questions.length * 10)) * 100;
     finalScoreElement.textContent = playerScore;
-    
+
 
     scoreCircle.style.setProperty('--percentage', `${percentage}%`);
-    
+
     // Definir mensagem baseada na pontuação
     if (percentage >= 80) {
         resultMessageElement.textContent = 'Parabéns! Você é um expert em sustentabilidade!';
